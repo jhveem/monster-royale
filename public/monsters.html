@@ -37,7 +37,6 @@
 							<monster :monster="monster" v-show="monster.state === 'idle'"></monster>
 							<div v-show="monster.state === 'idle'">
 								<button @click="addAsParent(monster)">Breed</button>
-								<button @click="breedWild(monster)">Breed Wild</button>
 								<button @click="release(monster)">Release</button>
 								<button @click="battle(monster)">Battle</button>
 							</div>

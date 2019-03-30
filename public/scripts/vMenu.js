@@ -2,7 +2,7 @@ Vue.component('main-menu', {
 	data: function() {
 		return {
 			menu: [
-				{name: "admin", url: "admin.html"},
+				{name: "login", url: "login.html"},
 				{name: "monsters", url: "monsters.html"},
 			],
 		};
