@@ -174,7 +174,7 @@ var app = new Vue({
 	methods: {
 		async getMonsters() {
 			try {
-				let response = await axios.get("/monsters/"+this.user).then(result => {
+				let response = await axios.get("/api/monsters/"+this.user).then(result => {
 					this.monsters = result.data;
 					for (let m in this.monsters) {
 						let monster = this.monsters[m];
@@ -206,7 +206,7 @@ var app = new Vue({
 			data.key = key;
 			data.value = value;
 			try {
-				await axios.post("/monsters/data", {data:data}).then(result => {
+				await axios.post("/api/monsters/data", {data:data}).then(result => {
 					return result;
 				});
 			} catch(error) {
@@ -215,7 +215,7 @@ var app = new Vue({
 		},
 		async refreshMonster(monster, key) {
 			try {
-				await axios.get("/monsters/data/"+monster._id+"/"+key).then(result => {
+				await axios.get("/api/monsters/data/"+monster._id+"/"+key).then(result => {
 					monster[key] = result.data;
 					if (key === 'state') {
 						monster['stateStart'] = new Date();
@@ -227,7 +227,7 @@ var app = new Vue({
 		},
 		async getCurrentMonsterDataById(id, key) {
 			try {
-				await axios.get("/monsters/data/"+id+"/all").then(result => {
+				await axios.get("/api/monsters/data/"+id+"/all").then(result => {
 					console.log(result.data);
 					this.currentMonster = result.data;
 				});
@@ -245,7 +245,7 @@ var app = new Vue({
 			data.participantId = monster._id;
 			try {
 				monster.state = 'pending battle';
-				let response = await axios.post("/battle/queue", {data:data}).then(result => {
+				let response = await axios.post("/api/battle/queue", {data:data}).then(result => {
 					console.log(result.data);	
 				});
 			} catch(error) {
@@ -267,7 +267,7 @@ var app = new Vue({
 				let data = {};
 				data.user = this.user;
 				data.userMonster = monster;
-				let response = await axios.put("/monsters/breedWild", {data:data}).then(result => {
+				let response = await axios.put("/api/monsters/breedWild", {data:data}).then(result => {
 					this.monsters.push(result.data);
 				});
 			} catch(error) {

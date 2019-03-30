@@ -32,7 +32,7 @@ var app = new Vue({
 	methods: {
 		async getBattleById(battleId) {
 			try {
-				let response = await axios.get("/battle/"+battleId).then(result => {
+				let response = await axios.get("/api/battle/"+battleId).then(result => {
 					this.battle = result.data;
 					console.log(this.battle.date);
 				});

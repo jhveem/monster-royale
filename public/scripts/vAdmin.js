@@ -14,7 +14,7 @@ var app = new Vue({
 		},
 		async createPlayer(playerData) {
 			try {
-				let response = await axios.post("/user/create", {
+				let response = await axios.post("/api/user/create", {
 					data: this.playerData,
 				}).then(result => {
 					console.log(result.data);	
@@ -32,7 +32,7 @@ var app = new Vue({
 			try {
 				console.log('login attempt');
 				console.log(playerData);
-				let response = await axios.post("/user/login", {
+				let response = await axios.post("/api/user/login", {
 					data: this.playerData,
 				}).then(result => {
 					console.log(result.data);
@@ -48,7 +48,7 @@ var app = new Vue({
 		},
 		async updatePassword(playerData) {
 			try {
-				let response = await axios.put("/user/password", {
+				let response = await axios.put("/api/user/password", {
 					data: this.playerData,
 				}).then(result => {
 					console.log(result.data);	

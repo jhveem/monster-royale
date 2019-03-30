@@ -23,7 +23,7 @@ for (var i = 0; i < 100; i++) {
 	monster.generateNewMonster();
 }
 
-app.post('/battle/queue', async (req, res) => {
+app.post('/api/battle/queue', async (req, res) => {
 	let participantId = req.body.data.participantId;
 	let opponenetId; 
 	let participant;
@@ -68,7 +68,7 @@ app.post('/battle/queue', async (req, res) => {
 		console.log(error);
 	});
 });
-app.get('/battle/:id', async (req, res) => {
+app.get('/api/battle/:id', async (req, res) => {
 	let id = req.params["id"];
 	battle.getDataById(id).then(result=> {
 		let data = result;
@@ -79,7 +79,7 @@ app.get('/battle/:id', async (req, res) => {
 
 });
 
-app.post('/battle/test', async (req, res) => {
+app.post('/api/battle/test', async (req, res) => {
 	let participants = req.body.data.participants; 
 	let participantData = []; 
 	for (var p = 0; p < participants.length; p++) {
@@ -91,7 +91,7 @@ app.post('/battle/test', async (req, res) => {
 	});
 });
 
-app.put('/monsters/breed', async (req, res) => {
+app.put('/api/monsters/breed', async (req, res) => {
 	user.getId(req.body.data.user).then(userId => {
 		return monster.breed(req.body.data.mom, req.body.data.dad, userId);
 	}).then(function(child) {
@@ -104,7 +104,7 @@ app.put('/monsters/breed', async (req, res) => {
 	});
 });
 
-app.put('/monsters/breedWild', async(req, res) => {
+app.put('/api/monsters/breedWild', async(req, res) => {
 	let userId = "";
 	user.getId(req.body.data.user).then(uid => {
 		userId = uid;
@@ -125,7 +125,7 @@ app.put('/monsters/breedWild', async(req, res) => {
 		console.log(error);
 	});
 });
-app.get('/monsters/data/:id/:key', async (req, res) => {
+app.get('/api/monsters/data/:id/:key', async (req, res) => {
 	let id = req.params["id"];
 	let key = req.params["key"];
 	monster.getData(id).then(result=> {
@@ -140,7 +140,7 @@ app.get('/monsters/data/:id/:key', async (req, res) => {
 	});
 });
 
-app.post('/monsters/data', async (req, res) => {
+app.post('/api/monsters/data', async (req, res) => {
 	let incomingData = req.body.data;
 	monster.update(incomingData.id, incomingData.key, incomingData.value).then(result=> {
 		res.send(incomingData);
@@ -149,7 +149,7 @@ app.post('/monsters/data', async (req, res) => {
 	});
 });
 
-app.get('/monsters/:user', async (req, res) => {
+app.get('/api/monsters/:user', async (req, res) => {
 	let username = req.params["user"];
 	user.getId(username).then(userId => {
 		return monster.getUserMonsters(userId);
@@ -165,7 +165,7 @@ app.get('/monsters/:user', async (req, res) => {
 
 });
 
-app.post('/user/create', async (req, res) => {
+app.post('/api/user/create', async (req, res) => {
 	let userId = "";
 	user.createUser(req.body.data).then(function(result) {
 		let sendData = {};
@@ -185,7 +185,7 @@ app.post('/user/create', async (req, res) => {
 	});
 });
 
-app.post('/user/login', async (req, res) => {
+app.post('/api/user/login', async (req, res) => {
 	user.login(req.body.data).then(function(result) {
 		let sendData = {};
 		sendData.message = result;
@@ -197,7 +197,7 @@ app.post('/user/login', async (req, res) => {
 	});
 });
 
-app.put('/user/password', async (req, res) => {
+app.put('/api/user/password', async (req, res) => {
 	user.updatePassword(req.body.data).then(function(result) {
 		res.send(result);
 	}).catch(function(result){
