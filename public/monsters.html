@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<link rel="stylesheet" href="/styles/main.css" />
+		<link rel="stylesheet" href="/styles/monsters.css" />
+		<script src="/scripts/cookies.js"></script>
+	</head>
+	<body>
+		<div id="main-menu">
+			<main-menu></main-menu>
+		</div>
+		<div id="app">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<span>Element </span><select v-model="elementFilter">
+					<option v-for="element in elements">{{element}}</option>
+				</select>
+				<span>Skin</span><select v-model="skinFilter">
+					<option v-for="skin in skins">{{skin}}</option>
+				</select>
+				<span>Special</span><select v-model="specialFilter">
+					<option v-for="special in specials">{{special}}</option>
+				</select>
+			</nav>
+			<div v-if="unnamed.length === 0">
+				<div class="page-container">
+					<div class="monsters-container">
+						<div class="monster-container" v-for="monster in filteredMonsters">
+							<div class="monster-item" v-if="monster.name !==''"><h2 class="monster-header"><a :href="'/monster.html?id='+monster._id">{{monster.name}}</a></h2><pixel-img style="margin: 5px;" :src="'images/icon-'+monster.gender+'.png'" :stretch="2"></pixel-img><span>{{monster.state}}</div>
+
+							<div class="monster-item" v-if="monster.name ===''"><h3>EGG</h3></div>
+							<div class="egg-bar" :now="now" v-if="monster.state === 'egg'"><div class="egg-progress" :style="{width: eggBarPercent(monster,now)}"></div></div>
+							<div class="monster-item" :now="now" v-if="monster.state === 'egg'"><b>Time To Hatch:</b> {{secondsToBirth(monster)}}</div>
+							<div class="egg-bar" :now="now" v-if="monster.state === 'resting'"><div class="egg-progress" :style="{width: barPercent(monster,now, 5)}"></div></div>
+							<div class="monster-item" :now="now" v-if="monster.state === 'resting'"><b>Resting:</b> {{secondsToRested(monster, 1)}}</div>
+							<monster :monster="monster" v-show="monster.state === 'idle'"></monster>
+							<div v-show="monster.state === 'idle'">
+								<button @click="addAsParent(monster)">Breed</button>
+								<button @click="breedWild(monster)">Breed Wild</button>
+								<button @click="release(monster)">Release</button>
+								<button @click="battle(monster)">Battle</button>
+							</div>
+						</div>
+					</div>
+					<div class="action-column">
+						<h1 class="data-block">BREEDING</h1>
+						<div class="breed-div">
+							<div class="monster-container" v-if="typeof(mom.name) !== 'undefined'">
+								<h3>Mom</h3>
+								<monster :monster="mom" ></monster>
+							</div>
+							<div class="monster-container" v-if="typeof(dad.name) !== 'undefined'">
+								<h3>Dad</h3>
+								<monster :monster="dad" ></monster>
+							</div>
+							<button @click="breed()" v-if="typeof(dad.name) !== 'undefined' && typeof(mom.name) !== 'undefined'">Breed</button>
+							<button @click="battleTest()" v-if="typeof(dad.name) !== 'undefined' && typeof(mom.name) !== 'undefined'">Battle</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-else>
+				<div class="monster-container">
+					<div class="monster-item monster-item-long">
+						<input v-model="newName"></input>
+						<button @click="saveName()">Save</button>
+					</div>
+					<monster :monster="unnamed[0]"></monster>
+					<div class="monster-item monster-item-long"></div>
+					<div class="monster-item"></div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+		<script src="scripts/images.js"></script>
+		<script src="scripts/vMonsters.js"></script>
+		<script src="scripts/vMenu.js"></script>
+	</body>
+</html>

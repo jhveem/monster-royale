@@ -1,0 +1,18 @@
+{
+  "name": "monsterroyale",
+  "version": "1.0.0",
+  "description": "A monster breeding and battling game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19",
+    "socket.io": "^2.2.0"
+  }
+}

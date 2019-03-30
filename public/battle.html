@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<link rel="stylesheet" href="/styles/main.css" />
+		<link rel="stylesheet" href="/styles/monsters.css" />
+		<link rel="stylesheet" href="/styles/battle.css" />
+		<script src="/scripts/cookies.js"></script>
+	</head>
+	<body>
+		<div id="main-menu">
+			<main-menu></main-menu>
+		</div>
+		<div id="app">
+			<div class="battle-container">
+				<div class="monster-item" v-for="entry in battle.transcript">{{displayTranscript(entry)}}</div>	
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+		<script src="scripts/images.js"></script>
+		<script src="scripts/vBattle.js"></script>
+		<script src="scripts/vMenu.js"></script>
+	</body>
+</html>

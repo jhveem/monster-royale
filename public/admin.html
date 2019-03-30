@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<link rel="stylesheet" href="/styles/main.css" />
+		<script src="/scripts/cookies.js"></script>
+	</head>
+	<body>
+		<div id="main-menu">
+			<main-menu></main-menu>
+		</div>
+		<div id="app" class="data-block">
+			<div id="login-fields" v-if="user === ''">
+				<p>Name</p><input v-model="playerData.name"></input>
+				<br>
+				<p>Password</p><input v-model="playerData.password"></input>
+				<br>
+				<p>Old Password</p><input v-model="playerData.oldPassword"></input>
+				<br>
+				<br>
+				<button @click="login(playerData)">login</button>
+				<button @click="createPlayer(playerData)">create player</button>
+				<button @click="updatePassword(playerData)">update password</button>
+			</div>
+			<div id="logout-fields" v-else>
+				<p>You are now logged in as <b>{{user}}</b>.</p>
+				<br>
+				<button @click="logout()">logout</button>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+		<script src="scripts/vAdmin.js"></script>
+		<script src="scripts/vMenu.js"></script>
+	</body>
+</html>
